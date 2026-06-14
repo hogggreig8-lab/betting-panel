@@ -64,6 +64,8 @@ def handle_join_request(join_request):
 
 
 def run_join_bot():
+    bot.remove_webhook()
+
     bot.infinity_polling(
         skip_pending=True,
         timeout=20,
