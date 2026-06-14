@@ -4,6 +4,7 @@ from sqlalchemy import Column
 from sqlalchemy import Integer
 from sqlalchemy import String
 from sqlalchemy import DateTime
+from sqlalchemy import UniqueConstraint
 
 from app.core.database import Base
 
@@ -21,3 +22,7 @@ class Visit(Base):
     domain = Column(String(255))
 
     created_at = Column(DateTime, default=datetime.utcnow)
+
+    __table_args__ = (
+        UniqueConstraint("ip", "user_agent", name="unique_visit_ip_user_agent"),
+    )

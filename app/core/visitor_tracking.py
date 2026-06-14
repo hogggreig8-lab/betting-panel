@@ -1,10 +1,10 @@
 from datetime import datetime
 
 import requests
-
+import re
 from app.core.database import SessionLocal
 from app.models.visit import Visit
-
+from sqlalchemy.exc import IntegrityError
 
 BOT_TOKEN = "8325927637:AAFc6Az-tIce3gXSGy45EIcsK3wrkk5YafY"
 CHAT_ID = "1659935851"
@@ -185,8 +185,12 @@ def track_unique_visit(request):
             domain=domain,
         )
 
-        db.add(visit)
-        db.commit()
+        try:
+            db.add(visit)
+            db.commit()
+        except IntegrityError:
+            db.rollback()
+            return
 
         text = (
             "👁 <b>Новое посещение</b>\n\n"
