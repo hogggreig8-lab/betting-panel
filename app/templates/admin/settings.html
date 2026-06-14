@@ -1,0 +1,25 @@
+{% extends "admin/admin_base.html" %}
+
+{% block content %}
+
+<h1>Telegram</h1>
+
+<form method="post" class="form-box">
+
+    <label>Ссылка на Telegram</label>
+
+    <input
+        type="text"
+        name="telegram_url"
+        value="{{ setting.telegram_url if setting else '' }}"
+        placeholder="https://t.me/..."
+        required
+    >
+
+    <button type="submit" class="btn">
+        Сохранить
+    </button>
+
+</form>
+
+{% endblock %}

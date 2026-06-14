@@ -1,0 +1,104 @@
+{% extends "admin/admin_base.html" %}
+
+{% block content %}
+
+<h1>Прогноз</h1>
+
+<form method="post" class="form-box">
+
+    <label>Категория</label>
+
+    <select name="category" required>
+
+        <option value="free"
+        {% if stat and stat.category == "free" %}
+        selected
+        {% endif %}
+        >
+            Бесплатные
+        </option>
+
+        <option value="paid"
+        {% if stat and stat.category == "paid" %}
+        selected
+        {% endif %}
+        >
+            Платные
+        </option>
+
+    </select>
+
+    <label>Дата</label>
+
+    <input
+        type="date"
+        name="match_date"
+        value="{% if stat %}{{ stat.match_date }}{% else %}{{ today }}{% endif %}"
+        required
+    >
+
+    <label>Спорт</label>
+
+    <input
+        type="text"
+        name="sport"
+        value="{{ stat.sport if stat else '' }}"
+        required
+    >
+
+    <label>Событие</label>
+
+    <input
+        type="text"
+        name="event"
+        value="{{ stat.event if stat else '' }}"
+        required
+    >
+
+    <label>Прогноз</label>
+
+    <input
+        type="text"
+        name="prediction"
+        value="{{ stat.prediction if stat else '' }}"
+        required
+    >
+
+    <label>Коэффициент</label>
+
+    <input
+        type="text"
+        name="odds"
+        value="{{ stat.odds if stat else '' }}"
+        required
+    >
+
+    <label>Результат</label>
+
+    <select name="result" required>
+
+        <option value="win"
+        {% if stat and stat.result == "win" %}
+        selected
+        {% endif %}
+        >
+            Победа
+        </option>
+
+        <option value="lose"
+        {% if stat and stat.result == "lose" %}
+        selected
+        {% endif %}
+        >
+            Поражение
+        </option>
+
+    </select>
+
+    <button type="submit" class="btn">
+        Сохранить
+    </button>
+
+</form>
+
+{% endblock %}

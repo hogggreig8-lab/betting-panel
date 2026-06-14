@@ -1,0 +1,38 @@
+{% extends "admin/admin_base.html" %}
+
+{% block content %}
+
+<div class="page-head">
+    <h1>Отзывы</h1>
+    <a href="/admin/reviews/create" class="btn">Добавить</a>
+</div>
+{% if not reviews %}
+<div class="card">
+    Отзывы пока не добавлены.
+</div>
+{% endif %}
+{% for review in reviews %}
+<div class="card">
+    <h3>{{ review.author }}</h3>
+
+    {% if review.published_at %}
+        <p>Дата: {{ review.published_at.strftime('%d.%m.%Y %H:%M') }}</p>
+    {% endif %}
+
+    <p>Рейтинг: {{ review.rating }}</p>
+    <p>{{ review.text }}</p>
+
+    <div class="actions">
+        <a href="/admin/reviews/edit/{{ review.id }}" class="btn">Редактировать</a>
+        <form
+    method="post"
+    action="/admin/reviews/delete/{{ review.id }}"
+    onsubmit="return confirm('Удалить этот отзыв?');"
+>
+    <button type="submit" class="btn btn-danger">Удалить</button>
+</form>
+    </div>
+</div>
+{% endfor %}
+
+{% endblock %}

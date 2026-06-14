@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Команда спортивных прогнозистов{% endblock %}</title>
+    <meta name="description" content="{% block description %}Команда спортивных аналитиков, статистика прогнозов, отзывы клиентов и доступ в Telegram канал.{% endblock %}">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+<header class="header">
+    <div class="container header-inner">
+        <a href="/" class="logo">ProForecast</a>
+
+        <nav class="nav">
+    <a href="/" class="{% if request.url.path == '/' %}active{% endif %}">О нас</a>
+    <a href="/stats" class="{% if request.url.path == '/stats' %}active{% endif %}">Статистика</a>
+    <a href="/reviews" class="{% if request.url.path == '/reviews' %}active{% endif %}">Отзывы</a>
+    <a href="/contact" class="{% if request.url.path == '/contact' %}active{% endif %}">Telegram</a>
+</nav>
+    </div>
+</header>
+
+<main class="container">
+    {% block content %}{% endblock %}
+</main>
+
+<footer class="footer">
+    <div class="container footer-inner">
+
+        <div>
+            <div class="footer-logo">ProForecast</div>
+            <div class="footer-text">
+                Аналитика спортивных событий и прогнозы на основе данных.
+            </div>
+        </div>
+
+        <div class="footer-links">
+            <a href="/">О нас</a>
+            <a href="/stats">Статистика</a>
+            <a href="/reviews">Отзывы</a>
+            <a href="/contact">Telegram</a>
+        </div>
+
+    </div>
+</footer>
+
+</body>
+</html>

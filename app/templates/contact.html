@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Telegram канал с прогнозами{% endblock %}
+
+{% block content %}
+
+<section class="page-hero">
+    <div class="eyebrow">Telegram</div>
+    <h1>Все прогнозы публикуются в Telegram</h1>
+    <p>В канале публикуются бесплатные прогнозы, статистика результатов и условия доступа к платным прогнозам.</p>
+
+    {% if telegram and telegram.telegram_url %}
+        <a class="btn hero-btn" href="{{ telegram.telegram_url }}" target="_blank">
+            Перейти в Telegram
+        </a>
+    {% else %}
+        <div class="empty">Telegram ссылка ещё не добавлена.</div>
+    {% endif %}
+</section>
+
+{% endblock %}

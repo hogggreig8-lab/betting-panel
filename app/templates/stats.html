@@ -1,0 +1,178 @@
+{% extends "base.html" %}
+
+{% block title %}Статистика прогнозов{% endblock %}
+
+{% macro summary_block(items) %}
+    {% set total = items | length %}
+    {% set wins = items | selectattr("result", "equalto", "win") | list | length %}
+    {% set losses = items | selectattr("result", "equalto", "lose") | list | length %}
+
+    <div class="stats-summary">
+        <div class="metric-card">
+            <div class="metric-value">{{ total }}</div>
+            <div class="metric-label">Всего прогнозов</div>
+        </div>
+
+        <div class="metric-card">
+            <div class="metric-value">{{ wins }}</div>
+            <div class="metric-label">Успешные</div>
+        </div>
+
+        <div class="metric-card">
+            <div class="metric-value">{{ losses }}</div>
+            <div class="metric-label">Неуспешные</div>
+        </div>
+
+        <div class="metric-card">
+            <div class="metric-value">
+                {% if total > 0 %}
+                    {{ ((wins / total) * 100) | round(1) }}%
+                {% else %}
+                    0%
+                {% endif %}
+            </div>
+            <div class="metric-label">Проходимость</div>
+        </div>
+    </div>
+{% endmacro %}
+
+{% macro predictions_table(items) %}
+    {% if items %}
+        <div class="desktop-table">
+            <div class="table-wrap">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Дата</th>
+                            <th>Спорт</th>
+                            <th>Событие</th>
+                            <th>Прогноз</th>
+                            <th>Коэф.</th>
+                            <th>Результат</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                    {% for stat in items %}
+                        <tr>
+                            <td>{{ stat.match_date.strftime('%d.%m.%Y') }}</td>
+                            <td>{{ stat.sport }}</td>
+                            <td>{{ stat.event }}</td>
+                            <td>{{ stat.prediction }}</td>
+                            <td>{{ stat.odds }}</td>
+                            <td>
+                                {% if stat.result == "win" %}
+                                    <span class="result-badge win">✓</span>
+                                {% else %}
+                                    <span class="result-badge lose">×</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="mobile-predictions">
+            {% for stat in items %}
+                <div class="prediction-card">
+                    <div class="prediction-top">
+                        <span>{{ stat.match_date.strftime('%d.%m.%Y') }}</span>
+                        <span>{{ stat.sport }}</span>
+                    </div>
+
+                    <h3>{{ stat.event }}</h3>
+
+                    <div class="prediction-row">
+                        <span>Прогноз</span>
+                        <b>{{ stat.prediction }}</b>
+                    </div>
+
+                    <div class="prediction-row">
+                        <span>Коэффициент</span>
+                        <b>{{ stat.odds }}</b>
+                    </div>
+
+                    <div class="prediction-row">
+                        <span>Результат</span>
+                        <b>
+                            {% if stat.result == "win" %}
+                        <span class="mobile-result win">
+                            ✓ Успешный
+                        </span>
+                    {% else %}
+                        <span class="mobile-result lose">
+                            × Неуспешный
+                        </span>
+                    {% endif %}
+                        </b>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="empty">Прогнозы пока не добавлены.</div>
+    {% endif %}
+{% endmacro %}
+
+{% block content %}
+
+<section class="page-hero">
+    <div class="eyebrow">Результаты</div>
+    <h1>Статистика прогнозов</h1>
+    <p>Отдельный учёт платных и бесплатных прогнозов с автоматическим подсчётом результатов.</p>
+</section>
+
+<section class="stats-tabs">
+
+    <div class="tabs">
+        <a
+            href="/stats?tab=free&page=1"
+            class="tab-btn {% if active_tab == 'free' %}active{% endif %}"
+        >
+            Бесплатные
+        </a>
+
+        <a
+            href="/stats?tab=paid&page=1"
+            class="tab-btn {% if active_tab == 'paid' %}active{% endif %}"
+        >
+            Платные
+        </a>
+    </div>
+
+    {{ summary_block(all_current_stats) }}
+
+    {{ predictions_table(current_stats) }}
+
+    {% if total_pages > 1 %}
+        <div class="pagination">
+
+            {% if page > 1 %}
+                <a href="/stats?tab={{ active_tab }}&page={{ page - 1 }}">
+                    ← Назад
+                </a>
+            {% endif %}
+
+            {% for p in range(1, total_pages + 1) %}
+                <a
+                    href="/stats?tab={{ active_tab }}&page={{ p }}"
+                    class="{% if p == page %}active{% endif %}"
+                >
+                    {{ p }}
+                </a>
+            {% endfor %}
+
+            {% if page < total_pages %}
+                <a href="/stats?tab={{ active_tab }}&page={{ page + 1 }}">
+                    Вперёд →
+                </a>
+            {% endif %}
+
+        </div>
+    {% endif %}
+
+</section>
+
+{% endblock %}

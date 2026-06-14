@@ -1,0 +1,177 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #0f172a;
+    color: #e5e7eb;
+}
+
+.admin-layout {
+    min-height: 100vh;
+    display: flex;
+}
+
+.sidebar {
+    width: 260px;
+    background: #020617;
+    padding: 24px;
+    border-right: 1px solid #1e293b;
+}
+
+.admin-logo {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 32px;
+}
+
+.sidebar nav {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.sidebar a {
+    color: #cbd5e1;
+    text-decoration: none;
+    padding: 12px 14px;
+    border-radius: 10px;
+}
+
+.sidebar a:hover {
+    background: #1e293b;
+    color: #fff;
+}
+
+.sidebar .logout {
+    color: #f87171;
+    margin-top: 30px;
+}
+
+.admin-main {
+    flex: 1;
+    padding: 40px;
+}
+
+.page-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 28px;
+}
+
+h1 {
+    margin: 0;
+    font-size: 32px;
+}
+
+.btn {
+    display: inline-block;
+    background: #22c55e;
+    color: #04130a;
+    padding: 12px 18px;
+    border-radius: 10px;
+    text-decoration: none;
+    border: none;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.btn-danger {
+    background: #ef4444;
+    color: #fff;
+}
+
+.card {
+    background: #111827;
+    border: 1px solid #1e293b;
+    border-radius: 16px;
+    padding: 22px;
+    margin-bottom: 16px;
+}
+
+.actions {
+    margin-top: 14px;
+    display: flex;
+    gap: 10px;
+}
+
+input,
+textarea {
+    width: 100%;
+    background: #020617;
+    color: #fff;
+    border: 1px solid #334155;
+    border-radius: 10px;
+    padding: 13px;
+    margin-bottom: 16px;
+    font-size: 15px;
+}
+
+textarea {
+    min-height: 160px;
+}
+
+label {
+    display: block;
+    margin-bottom: 7px;
+    color: #cbd5e1;
+}
+
+.form-box {
+    max-width: 700px;
+}
+.login-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.login-box {
+    width: 100%;
+    max-width: 420px;
+    background: #111827;
+    border: 1px solid #1e293b;
+    border-radius: 18px;
+    padding: 30px;
+}
+select {
+    width: 100%;
+    background: #020617;
+    color: white;
+    border: 1px solid #334155;
+    border-radius: 10px;
+    padding: 13px;
+    margin-bottom: 16px;
+}
+.upload-preview {
+    width: 90px;
+    height: 90px;
+    border: 1px solid #334155;
+    border-radius: 14px;
+    padding: 10px;
+    margin-bottom: 12px;
+    background: #020617;
+}
+
+.upload-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 18px;
+}
+
+.checkbox-label input {
+    width: auto;
+    margin: 0;
+}

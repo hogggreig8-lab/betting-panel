@@ -1,0 +1,26 @@
+{% extends "admin/admin_base.html" %}
+
+{% block content %}
+
+<h1>Главная страница</h1>
+
+<form method="post" class="form-box">
+    <label>Описание команды</label>
+    <textarea name="about_text" required>{{ content.about_text if content else '' }}</textarea>
+
+    <label>Количество прогнозов</label>
+    <input type="text" name="predictions" value="{{ content.predictions if content else '' }}" required>
+
+    <label>Проходимость</label>
+    <input type="text" name="win_rate" value="{{ content.win_rate if content else '' }}" required>
+
+    <label>ROI</label>
+    <input type="text" name="roi" value="{{ content.roi if content else '' }}" required>
+
+    <label>Участники</label>
+    <input type="text" name="members" value="{{ content.members if content else '' }}" required>
+
+    <button type="submit" class="btn">Сохранить</button>
+</form>
+
+{% endblock %}

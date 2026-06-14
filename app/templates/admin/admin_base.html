@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Админка</title>
+    <link rel="stylesheet" href="/static/css/admin.css">
+</head>
+<body>
+
+<div class="admin-layout">
+
+    <aside class="sidebar">
+        <div class="admin-logo">Betting Admin</div>
+
+        <nav>
+            <a href="/admin/stats">Статистика</a>
+            <a href="/admin/content">Главная</a>
+            <a href="/admin/reviews">Отзывы</a>
+            <a href="/admin/settings">Telegram</a>
+            <a href="/" target="_blank">Открыть сайт</a>
+            <a href="/admin/vip">VIP прогноз</a>
+            <a href="/admin/logout" class="logout">Выйти</a>
+        </nav>
+    </aside>
+
+    <main class="admin-main">
+        {% block content %}{% endblock %}
+    </main>
+
+</div>
+
+</body>
+</html>

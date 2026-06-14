@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Вход в админку</title>
+    <link rel="stylesheet" href="/static/css/admin.css">
+</head>
+<body>
+
+<div class="login-page">
+    <form method="post" action="/admin/login" class="login-box">
+        <h1>Вход в админку</h1>
+
+        <label>Логин</label>
+        <input type="text" name="username" required>
+
+        <label>Пароль</label>
+        <input type="password" name="password" required>
+
+        <button type="submit" class="btn">Войти</button>
+    </form>
+</div>
+
+</body>
+</html>

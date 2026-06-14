@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}Отзывы клиентов{% endblock %}
+
+{% block content %}
+
+<section class="page-hero">
+    <div class="eyebrow">Отзывы</div>
+
+    <h1>Что говорят клиенты</h1>
+
+    <p>
+        Реальные отзывы пользователей о прогнозах, статистике и работе команды.
+    </p>
+</section>
+
+<section>
+    {% if reviews %}
+        <div class="reviews-grid">
+            {% for review in reviews %}
+                <div class="review">
+                    <div class="review-head">
+                        <img src="{{ review.avatar }}" alt="{{ review.author }}">
+
+                        <div>
+                            <h3>{{ review.author }}</h3>
+
+                            {% if review.published_at %}
+                                <div class="review-date">
+                                    {{ review.published_at.strftime('%d.%m.%Y %H:%M') }}
+                                </div>
+                            {% endif %}
+
+                            <div class="stars">
+                                {% for i in range(review.rating) %}
+                                    ★
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <p class="review-text">{{ review.text }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="empty">Отзывы пока не добавлены.</div>
+    {% endif %}
+</section>
+
+{% endblock %}

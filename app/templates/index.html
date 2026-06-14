@@ -1,0 +1,149 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="hero hero-center">
+    <div class="eyebrow">Спортивная аналитика нового уровня</div>
+
+    <h1>
+        Прогнозы на спорт,<br>
+        основанные на данных
+    </h1>
+
+    <p>
+        {{ content.about_text if content else 'Мы анализируем форму команд, статистику игроков, движение коэффициентов и рыночные перекосы, чтобы находить сильные прогнозы до начала матча.' }}
+    </p>
+
+    {% if telegram and telegram.telegram_url %}
+        <a class="btn hero-btn" href="{{ telegram.telegram_url }}" target="_blank">
+            Перейти в Telegram
+        </a>
+    {% endif %}
+</section>
+{% if vip_prediction %}
+<section class="vip-section">
+    <div class="vip-card">
+
+        <div class="vip-bg-logo vip-bg-left">
+            <img src="{{ vip_prediction.team_1_logo }}" alt="">
+        </div>
+
+        <div class="vip-bg-logo vip-bg-right">
+            <img src="{{ vip_prediction.team_2_logo }}" alt="">
+        </div>
+
+        <div class="vip-content">
+            <div class="vip-label">VIP прогноз на сегодня</div>
+
+            <h2>{{ vip_prediction.match_name }}</h2>
+
+            <p>{{ vip_prediction.league }}</p>
+
+            <div class="vip-date">
+                {{ vip_prediction.match_date.strftime('%d.%m.%Y %H:%M') }}
+            </div>
+
+            {% if telegram and telegram.telegram_url %}
+                <a class="btn hero-btn" href="{{ telegram.telegram_url }}" target="_blank">
+                    Посмотреть прогноз
+                </a>
+            {% endif %}
+        </div>
+
+    </div>
+</section>
+{% endif %}
+<section class="metrics-grid">
+    <div class="metric-card">
+        <div class="metric-value">{{ content.predictions if content else '12 500+' }}</div>
+        <div class="metric-label">Прогнозов</div>
+    </div>
+
+    <div class="metric-card">
+        <div class="metric-value">{{ content.win_rate if content else '71%' }}</div>
+        <div class="metric-label">Проходимость</div>
+    </div>
+
+    <div class="metric-card">
+        <div class="metric-value">{{ content.roi if content else '+24%' }}</div>
+        <div class="metric-label">ROI</div>
+    </div>
+
+    <div class="metric-card">
+        <div class="metric-value">{{ content.members if content else '5 000+' }}</div>
+        <div class="metric-label">Участников</div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="section-head">
+
+        <h2>Почему нам доверяют</h2>
+    </div>
+
+    <div class="feature-grid">
+        <div class="feature-card">
+            <h3>Проверяемая статистика</h3>
+            <p>Результаты прогнозов фиксируются и доступны для анализа без красивых сказок.</p>
+        </div>
+
+        <div class="feature-card">
+            <h3>Работа с данными</h3>
+            <p>Мы смотрим форму команд, составы, травмы, коэффициенты и движение линии.</p>
+        </div>
+
+        <div class="feature-card">
+            <h3>Разделение прогнозов</h3>
+            <p>Отдельно считаем бесплатные и платные прогнозы, чтобы картина была честной.</p>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="section-head row-head">
+        <div>
+
+            <h2>Что говорят клиенты</h2>
+        </div>
+
+        <a href="/reviews" class="section-link">Смотреть все →</a>
+    </div>
+
+    <div class="home-reviews compact-reviews">
+        {% for review in latest_reviews %}
+            <div class="review mini-review">
+                <div class="review-head">
+                    <img src="{{ review.avatar }}" alt="{{ review.author }}">
+
+                    <div>
+                        <h3>{{ review.author }}</h3>
+
+                        <div class="stars">
+                            {% for i in range(review.rating) %}
+                                ★
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+
+                <p class="review-text">{{ review.text }}</p>
+            </div>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="final-cta">
+    <h2>Готовы получать прогнозы?</h2>
+
+    <p>
+        Переходите в Telegram, смотрите статистику и выбирайте формат доступа.
+    </p>
+
+    {% if telegram and telegram.telegram_url %}
+        <a class="btn" href="{{ telegram.telegram_url }}" target="_blank">
+            Перейти в Telegram
+        </a>
+    {% endif %}
+</section>
+
+{% endblock %}

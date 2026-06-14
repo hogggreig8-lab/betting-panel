@@ -1,0 +1,61 @@
+{% extends "admin/admin_base.html" %}
+
+{% block content %}
+
+<h1>Форма отзыва</h1>
+
+<form method="post" enctype="multipart/form-data" class="form-box">
+
+    <label>Аватар</label>
+
+    {% if review and review.avatar %}
+        <div class="upload-preview">
+            <img src="{{ review.avatar }}" alt="">
+        </div>
+    {% endif %}
+
+    <input
+        type="file"
+        name="avatar"
+        accept="image/*"
+        {% if not review %}required{% endif %}
+    >
+
+    <label>Имя</label>
+    <input
+        type="text"
+        name="author"
+        value="{{ review.author if review else '' }}"
+        required
+    >
+
+    <label>Текст отзыва</label>
+    <textarea
+        name="text"
+        required
+    >{{ review.text if review else '' }}</textarea>
+
+    <label>Рейтинг</label>
+    <input
+        type="number"
+        name="rating"
+        min="1"
+        max="5"
+        value="{{ review.rating if review else 5 }}"
+        required
+    >
+
+    <label>Дата отзыва</label>
+    <input
+        type="datetime-local"
+        name="published_at"
+        value="{{ published_at_value }}"
+    >
+
+    <button type="submit" class="btn">
+        Сохранить
+    </button>
+
+</form>
+
+{% endblock %}

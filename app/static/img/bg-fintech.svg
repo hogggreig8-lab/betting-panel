@@ -1,0 +1,83 @@
+<svg width="1920" height="3000" xmlns="http://www.w3.org/2000/svg">
+
+<g opacity="0.05">
+
+<text x="120" y="320"
+font-size="220"
+font-family="Arial"
+font-weight="700"
+fill="white">
+71%
+</text>
+
+<text x="1250" y="520"
+font-size="260"
+font-family="Arial"
+font-weight="700"
+fill="white">
++24%
+</text>
+
+<text x="180" y="1100"
+font-size="240"
+font-family="Arial"
+font-weight="700"
+fill="white">
+1.87
+</text>
+
+<text x="1300" y="1500"
+font-size="220"
+font-family="Arial"
+font-weight="700"
+fill="white">
+2.14
+</text>
+
+<text x="250" y="2200"
+font-size="260"
+font-family="Arial"
+font-weight="700"
+fill="white">
+84%
+</text>
+
+<text x="1250" y="2600"
+font-size="240"
+font-family="Arial"
+font-weight="700"
+fill="white">
+1.63
+</text>
+
+</g>
+
+<g opacity="0.04">
+
+<path
+d="M120 700
+L380 620
+L580 780
+L820 640
+L1100 820
+L1450 500"
+stroke="white"
+stroke-width="6"
+fill="none"
+/>
+
+<path
+d="M200 1850
+L500 1700
+L760 1900
+L980 1650
+L1300 1820
+L1600 1500"
+stroke="white"
+stroke-width="6"
+fill="none"
+/>
+
+</g>
+
+</svg>

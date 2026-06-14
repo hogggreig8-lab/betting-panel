@@ -1,0 +1,63 @@
+{% extends "admin/admin_base.html" %}
+
+{% block content %}
+
+<h1>VIP прогноз дня</h1>
+
+<form method="post" enctype="multipart/form-data" class="form-box">
+
+    <label>Чемпионат</label>
+    <input type="text" name="league" value="{{ vip.league if vip else '' }}" required>
+
+    <label>Название матча</label>
+    <input type="text" name="match_name" value="{{ vip.match_name if vip else '' }}" required>
+
+    <label>Дата и время</label>
+    <input
+        type="datetime-local"
+        name="match_date"
+        value="{% if vip %}{{ vip.match_date.strftime('%Y-%m-%dT%H:%M') }}{% else %}{{ now }}{% endif %}"
+        required
+    >
+
+    <label>Лого / флаг первой команды</label>
+    {% if vip and vip.team_1_logo %}
+        <div class="upload-preview">
+            <img src="{{ vip.team_1_logo }}" alt="">
+        </div>
+    {% endif %}
+    <input
+        type="file"
+        name="team_1_logo"
+        accept="image/*"
+        {% if not vip %}required{% endif %}
+    >
+
+    <label>Лого / флаг второй команды</label>
+    {% if vip and vip.team_2_logo %}
+        <div class="upload-preview">
+            <img src="{{ vip.team_2_logo }}" alt="">
+        </div>
+    {% endif %}
+    <input
+        type="file"
+        name="team_2_logo"
+        accept="image/*"
+        {% if not vip %}required{% endif %}
+    >
+
+    <label class="checkbox-label">
+        <input
+            type="checkbox"
+            name="is_active"
+            value="1"
+            {% if vip and vip.is_active %}checked{% endif %}
+        >
+        Активен на главной
+    </label>
+
+    <button type="submit" class="btn">Сохранить</button>
+
+</form>
+
+{% endblock %}

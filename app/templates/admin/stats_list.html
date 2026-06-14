@@ -1,0 +1,55 @@
+{% extends "admin/admin_base.html" %}
+
+{% block content %}
+
+<div class="page-head">
+    <h1>Прогнозы</h1>
+    <a href="/admin/stats/create" class="btn">Добавить прогноз</a>
+</div>
+
+{% if not stats %}
+<div class="card">
+    Прогнозы пока не добавлены.
+</div>
+{% endif %}
+
+{% for stat in stats %}
+<div class="card">
+    <h3>{{ stat.event }}</h3>
+
+    <p>Категория:
+        {% if stat.category == "paid" %}
+            Платные
+        {% else %}
+            Бесплатные
+        {% endif %}
+    </p>
+
+    <p>Дата: {{ stat.match_date.strftime('%d.%m.%Y') }}</p>
+    <p>Спорт: {{ stat.sport }}</p>
+    <p>Прогноз: {{ stat.prediction }}</p>
+    <p>Коэффициент: {{ stat.odds }}</p>
+    <p>
+        Результат:
+        {% if stat.result == "win" %}
+            ✅ Успешный
+        {% else %}
+            ❌ Неуспешный
+        {% endif %}
+    </p>
+
+    <div class="actions">
+        <a href="/admin/stats/edit/{{ stat.id }}" class="btn">Редактировать</a>
+
+        <form
+            method="post"
+            action="/admin/stats/delete/{{ stat.id }}"
+            onsubmit="return confirm('Удалить этот прогноз?');"
+        >
+            <button type="submit" class="btn btn-danger">Удалить</button>
+        </form>
+    </div>
+</div>
+{% endfor %}
+
+{% endblock %}

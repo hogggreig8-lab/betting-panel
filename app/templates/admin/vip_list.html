@@ -1,0 +1,34 @@
+{% extends "admin/admin_base.html" %}
+
+{% block content %}
+
+<div class="page-head">
+    <h1>VIP прогноз дня</h1>
+    <a href="/admin/vip/create" class="btn">Добавить</a>
+</div>
+
+{% if not vip_predictions %}
+<div class="card">
+    VIP прогнозы пока не добавлены.
+</div>
+{% endif %}
+
+{% for vip in vip_predictions %}
+<div class="card">
+    <h3>{{ vip.match_name }}</h3>
+
+    <p>Чемпионат: {{ vip.league }}</p>
+    <p>Дата: {{ vip.match_date.strftime('%d.%m.%Y %H:%M') }}</p>
+    <p>Активен: {{ 'Да' if vip.is_active else 'Нет' }}</p>
+
+    <div class="actions">
+        <a href="/admin/vip/edit/{{ vip.id }}" class="btn">Редактировать</a>
+
+        <form method="post" action="/admin/vip/delete/{{ vip.id }}" onsubmit="return confirm('Удалить VIP прогноз?');">
+            <button type="submit" class="btn btn-danger">Удалить</button>
+        </form>
+    </div>
+</div>
+{% endfor %}
+
+{% endblock %}
