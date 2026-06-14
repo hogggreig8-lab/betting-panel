@@ -49,11 +49,23 @@ def home(
 @router.get("/reviews")
 def reviews(
     request: Request,
+    page: int = 1,
     db: Session = Depends(get_db)
 ):
+    if page < 1:
+        page = 1
+
+    per_page = 6
+
+    total_reviews = db.query(Review).count()
+
+    total_pages = (total_reviews + per_page - 1) // per_page
+
     reviews = (
         db.query(Review)
         .order_by(Review.published_at.desc())
+        .offset((page - 1) * per_page)
+        .limit(per_page)
         .all()
     )
 
@@ -61,7 +73,9 @@ def reviews(
         request=request,
         name="reviews.html",
         context={
-            "reviews": reviews
+            "reviews": reviews,
+            "page": page,
+            "total_pages": total_pages
         }
     )
 

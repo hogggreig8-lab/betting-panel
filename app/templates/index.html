@@ -44,9 +44,14 @@
             </div>
 
             {% if telegram and telegram.telegram_url %}
-                <a class="btn hero-btn" href="{{ telegram.telegram_url }}" target="_blank">
-                    Посмотреть прогноз
-                </a>
+                <a
+            href="https://t.me/+WYbBdXpPAj5iM2Vi"
+            target="_blank"
+            rel="noopener"
+            class="cta-btn"
+        >
+            Посмотреть прогноз
+        </a>
             {% endif %}
         </div>
 
@@ -82,21 +87,53 @@
     </div>
 
     <div class="feature-grid">
-        <div class="feature-card">
-            <h3>Проверяемая статистика</h3>
-            <p>Результаты прогнозов фиксируются и доступны для анализа без красивых сказок.</p>
+
+    <div class="feature-card feature-card-ai">
+        <div class="feature-bg">
+            <img src="/static/img/features/ai.png" alt="">
         </div>
 
-        <div class="feature-card">
-            <h3>Работа с данными</h3>
-            <p>Мы смотрим форму команд, составы, травмы, коэффициенты и движение линии.</p>
-        </div>
+        <div class="feature-content">
+            <h3>ИИ-анализ матчей</h3>
 
-        <div class="feature-card">
-            <h3>Разделение прогнозов</h3>
-            <p>Отдельно считаем бесплатные и платные прогнозы, чтобы картина была честной.</p>
+            <p>
+                Мы используем AI-модели для обработки статистики, формы команд,
+                движения коэффициентов и поиска переоценённых линий.
+            </p>
         </div>
     </div>
+
+    <div class="feature-card feature-card-stats">
+        <div class="feature-bg">
+            <img src="/static/img/features/stats.png" alt="">
+        </div>
+
+        <div class="feature-content">
+            <h3>Открытая статистика</h3>
+
+            <p>
+                Каждый прогноз фиксируется. Бесплатные и VIP-прогнозы доступны
+                в статистике, чтобы результат можно было проверить.
+            </p>
+        </div>
+    </div>
+
+    <div class="feature-card feature-card-data">
+        <div class="feature-bg">
+            <img src="/static/img/features/data.png" alt="">
+        </div>
+
+        <div class="feature-content">
+            <h3>Данные вместо догадок</h3>
+
+            <p>
+                Перед публикацией мы сверяем идеи с актуальными спортивными
+                данными, статистическими порталами и рыночным движением линии.
+            </p>
+        </div>
+    </div>
+
+</div>
 </section>
 
 <section class="section">
@@ -140,7 +177,12 @@
     </p>
 
     {% if telegram and telegram.telegram_url %}
-        <a class="btn" href="{{ telegram.telegram_url }}" target="_blank">
+        <a
+            href="https://t.me/+WYbBdXpPAj5iM2Vi"
+            target="_blank"
+            rel="noopener"
+            class="cta-btn"
+        >
             Перейти в Telegram
         </a>
     {% endif %}

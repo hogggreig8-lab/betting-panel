@@ -5,13 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Команда спортивных прогнозистов{% endblock %}</title>
     <meta name="description" content="{% block description %}Команда спортивных аналитиков, статистика прогнозов, отзывы клиентов и доступ в Telegram канал.{% endblock %}">
+    <meta name="description" content="Прогнозы на спорт, футбольные прогнозы, VIP прогнозы, ставки на спорт, аналитика матчей, статистика прогнозов, прогнозы на Чемпионат Мира 2026">
+    <meta property="og:title"
+      content="GoldenFrog — Прогнозы на спорт">
+
+<meta property="og:description"
+      content="VIP прогнозы, открытая статистика и аналитика матчей">
+
+<meta property="og:type"
+      content="website">
+
+<meta property="og:url"
+      content="https://goldenfrog.top">
+
+<meta property="og:image"
+      content="https://goldenfrog.top/static/img/preview.jpg">
+    <meta name="keywords"
+      content="прогнозы на спорт, прогнозы на футбол, ставки на спорт, vip прогнозы, прогнозы на сегодня, футбольная аналитика, чемпионат мира 2026, прогнозы чм 2026, прогнозы на матчи, спортивная аналитика">
+
+<meta name="robots" content="index, follow">
     <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="icon" href="/static/favicon.ico">
 </head>
 <body>
 
 <header class="header">
     <div class="container header-inner">
-        <a href="/" class="logo">ProForecast</a>
+        <a href="/" class="logo">
+    <img src="/static/img/logo.png" alt="GoldenFrog">
+</a>
 
         <nav class="nav">
     <a href="/" class="{% if request.url.path == '/' %}active{% endif %}">О нас</a>
@@ -30,7 +52,9 @@
     <div class="container footer-inner">
 
         <div>
-            <div class="footer-logo">ProForecast</div>
+            <div class="footer-logo">
+    <img src="/static/img/logo.png" alt="GoldenFrog">
+</div>
             <div class="footer-text">
                 Аналитика спортивных событий и прогнозы на основе данных.
             </div>

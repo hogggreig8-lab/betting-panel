@@ -20,8 +20,8 @@ from fastapi import UploadFile
 from fastapi import File
 COOKIE_NAME = "admin_session"
 
-ADMIN_LOGIN = "admin"
-ADMIN_PASSWORD = "123456"
+ADMIN_LOGIN = "pokusai228"
+ADMIN_PASSWORD = "pokusaikyrylo911"
 UPLOAD_DIR = "app/static/uploads"
 
 
