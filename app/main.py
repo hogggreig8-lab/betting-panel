@@ -9,9 +9,16 @@ from fastapi.staticfiles import StaticFiles
 import app.models.stat
 import app.models.setting
 import app.models.review
+import app.models.visit
+from app.core.visitor_tracking import track_unique_visit
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
+@app.middleware("http")
+async def visitor_tracking_middleware(request, call_next):
+    track_unique_visit(request)
+    response = await call_next(request)
+    return response
 app.mount(
     "/static",
     StaticFiles(directory="app/static"),
