@@ -12,12 +12,15 @@ import app.models.review
 import app.models.visit
 from app.core.visitor_tracking import track_unique_visit
 from app.core.db_backup import start_backup_worker
+import app.models.join_request
+from app.core.join_requests_bot import start_join_requests_worker
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
 @app.on_event("startup")
 def startup_event():
     start_backup_worker()
+    start_join_requests_worker()
 @app.middleware("http")
 async def visitor_tracking_middleware(request, call_next):
     track_unique_visit(request)

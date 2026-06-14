@@ -58,19 +58,39 @@ def get_client_ip(request):
 
 
 def detect_device(user_agent: str):
-    ua = user_agent.lower()
+    ua = user_agent
 
-    if "iphone" in ua:
-        return "iPhone"
+    if not ua:
+        return "Unknown"
 
-    if "android" in ua:
+    ua_lower = ua.lower()
+
+    if "iphone" in ua_lower:
+        return "iPhone / iOS"
+
+    if "ipad" in ua_lower:
+        return "iPad / iOS"
+
+    if "android" in ua_lower:
+        match = re.search(r"Android [^;]+;\s?([^;)]+)", ua)
+
+        if match:
+            model = match.group(1).strip()
+
+            model = model.replace("Build", "").strip()
+
+            return f"Android — {model}"
+
         return "Android"
 
-    if "ipad" in ua:
-        return "iPad"
+    if "windows" in ua_lower:
+        return "Desktop — Windows"
 
-    if "mobile" in ua:
-        return "Mobile"
+    if "macintosh" in ua_lower or "mac os" in ua_lower:
+        return "Desktop — macOS"
+
+    if "linux" in ua_lower:
+        return "Desktop — Linux"
 
     return "Desktop"
 
@@ -170,11 +190,8 @@ def track_unique_visit(request):
 
         text = (
             "👁 <b>Новое посещение</b>\n\n"
-            f"📡 <b>Домен:</b> {domain}\n"
             f"🌎 <b>ГЕО:</b> {flag} {country}\n"
             f"📱 <b>Устройство:</b> {device}\n"
-            f"🕒 <b>Время:</b> {datetime.now().strftime('%d.%m.%Y %H:%M:%S')}\n"
-            f"🌐 <b>IP:</b> {ip}"
         )
 
         send_telegram(text)
