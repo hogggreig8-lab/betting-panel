@@ -14,6 +14,9 @@ from app.core.visitor_tracking import track_unique_visit
 from app.core.db_backup import start_backup_worker
 import app.models.join_request
 from app.core.join_requests_bot import start_join_requests_worker
+import os
+from fastapi.staticfiles import StaticFiles
+
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
@@ -30,6 +33,13 @@ app.mount(
     "/static",
     StaticFiles(directory="app/static"),
     name="static"
+)
+os.makedirs(os.getenv("UPLOAD_DIR", "app/static/uploads"), exist_ok=True)
+
+app.mount(
+    "/uploads",
+    StaticFiles(directory=os.getenv("UPLOAD_DIR", "app/static/uploads")),
+    name="uploads"
 )
 app.include_router(public_router)
 app.include_router(admin_router)

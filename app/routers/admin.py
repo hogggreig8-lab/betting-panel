@@ -22,7 +22,7 @@ COOKIE_NAME = "admin_session"
 
 ADMIN_LOGIN = "pokusai228"
 ADMIN_PASSWORD = "pokusaikyrylo911"
-UPLOAD_DIR = "app/static/uploads"
+UPLOAD_DIR = os.getenv("UPLOAD_DIR", "app/static/uploads")
 
 
 def save_upload(file: UploadFile):
@@ -35,7 +35,7 @@ def save_upload(file: UploadFile):
     with open(file_path, "wb") as buffer:
         shutil.copyfileobj(file.file, buffer)
 
-    return f"/static/uploads/{filename}"
+    return f"/uploads/{filename}"
 def datetime_value(value):
     if value:
         return value.strftime("%Y-%m-%dT%H:%M")
