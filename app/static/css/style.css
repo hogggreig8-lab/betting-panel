@@ -446,7 +446,10 @@ main.container {
 .telegram-box,
 .final-cta {
     margin-top: 40px;
-    padding: 54px 54px 20px;
+    margin-bottom: 60px;
+
+    padding: 54px 54px 40px;
+
     text-align: center;
 }
 
