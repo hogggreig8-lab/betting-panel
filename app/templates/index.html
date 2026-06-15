@@ -14,11 +14,14 @@
         {{ content.about_text if content else 'Мы анализируем форму команд, статистику игроков, движение коэффициентов и рыночные перекосы, чтобы находить сильные прогнозы до начала матча.' }}
     </p>
 
-    {% if telegram and telegram.telegram_url %}
-        <a class="btn hero-btn" href="{{ telegram.telegram_url }}" target="_blank">
-            Перейти в Telegram
-        </a>
-    {% endif %}
+    <a
+    href="https://t.me/+WYbBdXpPAj5iM2Vi"
+    target="_blank"
+    rel="noopener"
+    class="cta-btn"
+>
+    Перейти в Telegram
+</a>
 </section>
 {% if vip_prediction %}
 <section class="vip-section">
@@ -43,16 +46,14 @@
                 {{ vip_prediction.match_date.strftime('%d.%m.%Y %H:%M') }}
             </div>
 
-            {% if telegram and telegram.telegram_url %}
-                <a
-            href="https://t.me/+WYbBdXpPAj5iM2Vi"
-            target="_blank"
-            rel="noopener"
-            class="cta-btn"
-        >
-            Посмотреть прогноз
-        </a>
-            {% endif %}
+            <a
+    href="https://t.me/+WYbBdXpPAj5iM2Vi"
+    target="_blank"
+    rel="noopener"
+    class="cta-btn"
+>
+    Перейти в Telegram
+</a>
         </div>
 
     </div>
@@ -176,16 +177,14 @@
         Переходите в Telegram, смотрите статистику и выбирайте формат доступа.
     </p>
 
-    {% if telegram and telegram.telegram_url %}
-        <a
-            href="https://t.me/+WYbBdXpPAj5iM2Vi"
-            target="_blank"
-            rel="noopener"
-            class="cta-btn"
-        >
-            Перейти в Telegram
-        </a>
-    {% endif %}
+    <a
+    href="https://t.me/+WYbBdXpPAj5iM2Vi"
+    target="_blank"
+    rel="noopener"
+    class="cta-btn"
+>
+    Перейти в Telegram
+</a>
 </section>
 
 {% endblock %}

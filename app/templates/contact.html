@@ -9,18 +9,14 @@
     <h1>Все прогнозы публикуются в Telegram</h1>
     <p>В канале публикуются бесплатные прогнозы, статистика результатов и условия доступа к платным прогнозам.</p>
 
-    {% if telegram and telegram.telegram_url %}
-        <a
-            href="https://t.me/+WYbBdXpPAj5iM2Vi"
-            target="_blank"
-            rel="noopener"
-            class="cta-btn"
-        >
-            Перейти в Telegram
-        </a>
-    {% else %}
-        <div class="empty">Telegram ссылка ещё не добавлена.</div>
-    {% endif %}
+    <a
+    href="https://t.me/+WYbBdXpPAj5iM2Vi"
+    target="_blank"
+    rel="noopener"
+    class="cta-btn"
+>
+    Перейти в Telegram
+</a>
 </section>
 
 {% endblock %}
