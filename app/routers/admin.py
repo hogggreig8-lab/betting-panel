@@ -276,11 +276,13 @@ def edit_form(
 def edit_stat(
     stat_id: int,
     request: Request,
-    name: str = Form(...),
-    total: int = Form(...),
-    wins: int = Form(...),
-    losses: int = Form(...),
-    roi: str = Form(...),
+    category: str = Form(...),
+    match_date: str = Form(...),
+    sport: str = Form(...),
+    event: str = Form(...),
+    prediction: str = Form(...),
+    odds: str = Form(...),
+    result: str = Form(...),
     db: Session = Depends(get_db)
 ):
     if not check_auth(request):
@@ -290,16 +292,24 @@ def edit_stat(
         )
 
     stat = db.get(Stat, stat_id)
-    if stat is None:
-        return RedirectResponse("/admin/stats", status_code=303)
-    if wins + losses > total:
-        return RedirectResponse(f"/admin/stats/edit/{stat_id}", status_code=303)
 
-    stat.name = name
-    stat.total = total
-    stat.wins = wins
-    stat.losses = losses
-    stat.roi = roi
+    if stat is None:
+        return RedirectResponse(
+            "/admin/stats",
+            status_code=303
+        )
+
+    stat.category = category
+    stat.match_date = datetime.strptime(
+        match_date,
+        "%Y-%m-%d"
+    ).date()
+
+    stat.sport = sport
+    stat.event = event
+    stat.prediction = prediction
+    stat.odds = odds
+    stat.result = result
 
     db.commit()
 
