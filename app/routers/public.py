@@ -60,6 +60,27 @@ def home(
         paid_roi = round((paid_profit / paid_count) * 100, 1)
     else:
         paid_roi = 0
+    paid_stats = (
+        db.query(Stat)
+        .filter(Stat.category == "paid")
+        .all()
+    )
+
+    paid_wins = 0
+    paid_losses = 0
+
+    for stat in paid_stats:
+        if stat.result == "win":
+            paid_wins += 1
+        elif stat.result == "lose":
+            paid_losses += 1
+
+    paid_counted = paid_wins + paid_losses
+
+    if paid_counted > 0:
+        paid_winrate = round((paid_wins / paid_counted) * 100, 1)
+    else:
+        paid_winrate = 0
     return templates.TemplateResponse(
         request=request,
         name="index.html",
@@ -69,6 +90,7 @@ def home(
             "latest_reviews": latest_reviews,
             "vip_prediction": vip_prediction,
             "paid_roi": paid_roi,
+            "paid_winrate": paid_winrate,
         }
     )
 @router.get("/reviews")
