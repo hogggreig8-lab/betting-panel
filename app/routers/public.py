@@ -61,7 +61,7 @@ def home(
     else:
         paid_roi = 0
     all_stats = db.query(Stat).all()
-
+    total_predictions = len(all_stats)
     wins = 0
     losses = 0
 
@@ -88,6 +88,7 @@ def home(
             "vip_prediction": vip_prediction,
             "paid_roi": paid_roi,
             "paid_winrate": paid_winrate,
+            "total_predictions": total_predictions,
         }
     )
 @router.get("/reviews")
