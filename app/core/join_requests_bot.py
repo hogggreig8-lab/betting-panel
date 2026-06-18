@@ -16,14 +16,14 @@ def handle_join_request(join_request):
 
     db = SessionLocal()
     try:
-        # existing = (
-        #     db.query(JoinRequest)
-        #     .filter(JoinRequest.telegram_user_id == str(user.id))
-        #     .first()
-        # )
-        #
-        # if existing:
-        #     return
+        existing = (
+            db.query(JoinRequest)
+            .filter(JoinRequest.telegram_user_id == str(user.id))
+            .first()
+        )
+
+        if existing:
+            return
 
         username = user.username or ""
         first_name = user.first_name or ""
@@ -44,7 +44,7 @@ def handle_join_request(join_request):
         full_name = f"{first_name} {last_name}".strip()
 
         text = (
-            "📲 <b>Новая заявка</b>\n\n"
+            "✅📲 <b>Новая заявка</b>\n\n"
             f"👤 <b>Имя:</b> {full_name or 'не указано'}\n"
             f"🔗 <b>Username:</b> {username_text}"
         )
