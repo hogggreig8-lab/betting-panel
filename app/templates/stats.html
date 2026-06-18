@@ -6,6 +6,8 @@
     {% set total = items | length %}
     {% set wins = items | selectattr("result", "equalto", "win") | list | length %}
     {% set losses = items | selectattr("result", "equalto", "lose") | list | length %}
+    {% set refunds = items | selectattr("result", "equalto", "refund") | list | length %}
+    {% set counted = wins + losses %}
 
     <div class="stats-summary">
         <div class="metric-card">
@@ -24,9 +26,14 @@
         </div>
 
         <div class="metric-card">
+            <div class="metric-value">{{ refunds }}</div>
+            <div class="metric-label">Возвраты</div>
+        </div>
+
+        <div class="metric-card">
             <div class="metric-value">
-                {% if total > 0 %}
-                    {{ ((wins / total) * 100) | round(1) }}%
+                {% if counted > 0 %}
+                    {{ ((wins / counted) * 100) | round(1) }}%
                 {% else %}
                     0%
                 {% endif %}
@@ -62,10 +69,14 @@
                             <td>{{ stat.odds }}</td>
                             <td>
                                 {% if stat.result == "win" %}
-                                    <span class="result-badge win">✓</span>
-                                {% else %}
-                                    <span class="result-badge lose">×</span>
-                                {% endif %}
+                                <span class="result-badge win">✓</span>
+
+                            {% elif stat.result == "refund" %}
+                                <span class="result-badge refund">↺</span>
+
+                            {% else %}
+                                <span class="result-badge lose">×</span>
+                            {% endif %}
                             </td>
                         </tr>
                     {% endfor %}
@@ -98,14 +109,20 @@
                         <span>Результат</span>
                         <b>
                             {% if stat.result == "win" %}
-                        <span class="mobile-result win">
-                            ✓ Успешный
-                        </span>
-                    {% else %}
-                        <span class="mobile-result lose">
-                            × Неуспешный
-                        </span>
-                    {% endif %}
+                            <span class="mobile-result win">
+                                ✓ Успешный
+                            </span>
+
+                        {% elif stat.result == "refund" %}
+                            <span class="mobile-result refund">
+                                ↺ Возврат
+                            </span>
+
+                        {% else %}
+                            <span class="mobile-result lose">
+                                × Неуспешный
+                            </span>
+                        {% endif %}
                         </b>
                     </div>
                 </div>

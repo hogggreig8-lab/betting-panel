@@ -35,7 +35,31 @@ def home(
         .limit(3)
         .all()
     )
+    paid_stats = (
+        db.query(Stat)
+        .filter(Stat.category == "paid")
+        .all()
+    )
 
+    paid_profit = 0
+    paid_count = 0
+
+    for stat in paid_stats:
+        if stat.result == "win":
+            paid_profit += float(stat.odds) - 1
+            paid_count += 1
+
+        elif stat.result == "lose":
+            paid_profit -= 1
+            paid_count += 1
+
+        elif stat.result == "refund":
+            pass
+
+    if paid_count > 0:
+        paid_roi = round((paid_profit / paid_count) * 100, 1)
+    else:
+        paid_roi = 0
     return templates.TemplateResponse(
         request=request,
         name="index.html",
@@ -43,7 +67,8 @@ def home(
             "content": content,
             "telegram": setting,
             "latest_reviews": latest_reviews,
-            "vip_prediction": vip_prediction
+            "vip_prediction": vip_prediction,
+            "paid_roi": paid_roi,
         }
     )
 @router.get("/reviews")

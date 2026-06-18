@@ -317,6 +317,10 @@ main.container {
     background: rgba(239,68,68,.16);
     color: #f87171;
 }
+.result-badge.refund {
+    background: rgba(250,204,21,.16);
+    color: #facc15;
+}
 
 .mobile-predictions {
     display: none;
@@ -661,6 +665,11 @@ main.container {
         color: #ef4444;
         font-weight: 800;
     }
+
+    .mobile-result.refund {
+    color: #facc15;
+    font-weight: 800;
+}
 
     .telegram-box,
     .final-cta {

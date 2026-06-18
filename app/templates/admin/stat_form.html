@@ -93,6 +93,14 @@
             Поражение
         </option>
 
+        <option value="refund"
+        {% if stat and stat.result == "refund" %}
+        selected
+        {% endif %}
+        >
+            Возврат
+        </option>
+
     </select>
 
     <button type="submit" class="btn">
