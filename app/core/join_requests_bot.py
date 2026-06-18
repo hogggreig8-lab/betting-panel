@@ -1,7 +1,5 @@
-import threading
-from datetime import datetime
-
 import telebot
+from datetime import datetime
 
 from app.core.database import SessionLocal
 from app.core.visitor_tracking import BOT_TOKEN, CHAT_ID
@@ -31,14 +29,13 @@ def handle_join_request(join_request):
         username = user.username or ""
         first_name = user.first_name or ""
         last_name = user.last_name or ""
-        channel_title = chat.title or ""
 
         request_row = JoinRequest(
             telegram_user_id=str(user.id),
             username=username,
             first_name=first_name,
             last_name=last_name,
-            channel_title=channel_title
+            channel_title=chat.title or ""
         )
 
         db.add(request_row)
@@ -61,22 +58,3 @@ def handle_join_request(join_request):
 
     finally:
         db.close()
-
-
-def run_join_bot():
-    bot.remove_webhook()
-
-    bot.infinity_polling(
-        skip_pending=True,
-        timeout=20,
-        long_polling_timeout=20
-    )
-
-
-def start_join_requests_worker():
-    thread = threading.Thread(
-        target=run_join_bot,
-        daemon=True
-    )
-
-    thread.start()
