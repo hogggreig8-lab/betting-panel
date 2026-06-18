@@ -15,16 +15,15 @@ def handle_join_request(join_request):
     chat = join_request.chat
 
     db = SessionLocal()
-
     try:
-        existing = (
-            db.query(JoinRequest)
-            .filter(JoinRequest.telegram_user_id == str(user.id))
-            .first()
-        )
-
-        if existing:
-            return
+        # existing = (
+        #     db.query(JoinRequest)
+        #     .filter(JoinRequest.telegram_user_id == str(user.id))
+        #     .first()
+        # )
+        #
+        # if existing:
+        #     return
 
         username = user.username or ""
         first_name = user.first_name or ""
