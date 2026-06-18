@@ -60,25 +60,22 @@ def home(
         paid_roi = round((paid_profit / paid_count) * 100, 1)
     else:
         paid_roi = 0
-    paid_stats = (
-        db.query(Stat)
-        .filter(Stat.category == "paid")
-        .all()
-    )
+    all_stats = db.query(Stat).all()
 
-    paid_wins = 0
-    paid_losses = 0
+    wins = 0
+    losses = 0
 
-    for stat in paid_stats:
+    for stat in all_stats:
         if stat.result == "win":
-            paid_wins += 1
+            wins += 1
+
         elif stat.result == "lose":
-            paid_losses += 1
+            losses += 1
 
-    paid_counted = paid_wins + paid_losses
+    counted = wins + losses
 
-    if paid_counted > 0:
-        paid_winrate = round((paid_wins / paid_counted) * 100, 1)
+    if counted > 0:
+        paid_winrate = round((wins / counted) * 100, 1)
     else:
         paid_winrate = 0
     return templates.TemplateResponse(
